@@ -1,0 +1,25 @@
+ 
+    
+  <% pictures.each do |picture| %>
+
+      <div class="picture">
+        <div class="col-md-2 col-sm-2 col-xs-3">
+          <div class="panel panel-default">
+          
+            <div class="panel-heading text-center">
+              <%= link_to photoview_picture_path(id: picture.user,photoid: picture.id) do %>
+              <img src="<%= picture.image.thumb.url %>" alt="",size="70", border='0'>
+              <% end %>
+            </div>
+            
+            <div class="photo-main">
+              <p><%= link_to picture.title, photoview_picture_path(id: picture.user,photoid: picture.id) %></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+  <% end %>
+
+  
+<%= paginate pictures %>

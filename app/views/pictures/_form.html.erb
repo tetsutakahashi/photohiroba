@@ -1,0 +1,68 @@
+<%= form_for(picture) do |f| %>
+
+  <div class="form-group">
+    <%= f.label :title %>
+    <%= f.text_field :title, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :description %>
+    <%= f.text_field :description, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :tag %>
+    <%= f.text_field :tag, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :cmmaker %>
+    <%= f.text_field :cmmaker, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :cmmodelcode %>
+    <%= f.text_field :cmmodelcode, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :lzmaker %>
+    <%= f.text_field :lzmaker, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :lzmount %>
+    <%= f.text_field :lzmount, class: 'form-control' %>
+  </div>
+
+   <div class="form-group">
+    <%= f.label :lzmodelcode %>
+    <%= f.text_field :lzmodelcode, class: 'form-control' %>
+  </div>
+  
+  <!-- 追加箇所 開始 -->
+  <div class="form-group">
+    <% if @picture.image? %>
+      <div class="thumbnail">
+        <%= image_tag @picture.image.url %>
+      </div>
+    <% end %><br>
+    <%= f.label :image %><br>
+    <%= f.file_field :image %>
+    <%= f.hidden_field :image_cache %>
+  </div>
+  <div class="form-group">
+    <!-- 既存レコード(DBに保存されている)かつ、画像が存在する場合 -->
+    <% if @picture.persisted? && @picture.image? %>
+      <label>
+        <%= f.check_box :remove_image %>
+        画像を削除
+      </label>
+    <% end %>
+  </div>
+  <!-- 追加箇所 終了 -->
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,74 @@
+<div class="row">
+  <div class="photoviewnavi">
+    <div class="col-md-1 col-sm-1 col-xs-2">
+      <div class="photoviewnavi2">
+        <img class="media-object img-rounded " src="<%= gravatar_url(@user, { size: 30 }) %>" alt="">
+      </div>
+    </div>
+
+    <div class="col-md-11 col-sm-11 col-xs-10">
+      <div class="dropdown" class="photoviewnavi2">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+          <%= @user.name %><span class="caret"></span>
+        </button>
+        <!-- 選択肢 -->
+        <ul class="dropdown-menu">
+          <li class="<%= 'active' if current_page?(user_path(@user)) %>"><%= link_to user_path(@user) do %>写真一覧 <span class="badge"><%= @count_pictures %></span><% end %></li>
+          <li><a href="#">Followings</a></li>
+          <li><a href="#">Followers</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="photmain">
+    <aside class="col-md-3 col-sm-12 col-xs-12" >
+      <div class="photodata2" >
+      <h1><%= @photo.title %></h1>
+        <table class="table table-bordered">
+          <tr>
+            <th class="text-center">項目</th>
+            <th class="text-center">情報</th>
+          </tr>
+          <tr>
+            <td>カメラメーカー</td>
+            <td class="text-right"><%= @photo.cmmaker %></td>
+          </tr>
+          <tr>
+            <td>カメラ型式</td>
+            <td class="text-right"><%= @photo.cmmodelcode %></td>
+          </tr>
+          <tr>
+            <td>レンズメーカー</td>
+            <td class="text-right"><%= @photo.lzmaker %></td>
+          </tr>
+          <tr>
+            <td>レンズマウント</td>
+            <td class="text-right"><%= @photo.lzmount %></td>
+          </tr>
+          <tr>
+            <td>レンズ型式</td>
+            <td class="text-right"><%= @photo.lzmodelcode %></td>
+          </tr>
+          <tr>
+            <td>タグ</td>
+            <td class="text-right"><%= @photo.tag %></td>
+          </tr>
+        </table>
+      </div>
+    </aside>
+  
+    <div class="col-md-9 col-sm-12 col-xs-12" >
+    <div class="photoimg">    
+      <div class="photoview-heading text-center">
+        <img src="<%= @photo.image.thumb3.url %>" alt="" >
+      </div>
+    </div>    
+    </div>   
+  </div>
+      
+  <div class="pictrow">  
+    <%= render 'photo', pictures: @pictures %>
+  </div>
+</div>

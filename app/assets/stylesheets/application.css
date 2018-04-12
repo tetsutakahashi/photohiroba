@@ -13,3 +13,60 @@
  *= require_tree .
  *= require_self
  */
+ 
+
+/* body */
+footer {
+  margin-top: 40px;
+}
+
+/* search */
+.search {
+  margin-bottom: 20px;
+}
+
+/* picture */
+.picture .panel-body {
+  height: 70px;
+}
+.picture .panel-heading {
+  height: 150px;
+}
+.picture .panel-heading img {
+  height: 100%;
+  max-width: 100%;
+}
+
+.picture img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+/* photoviewnavi */
+.photoviewnavi {
+  height: 50px;
+  padding-top: 10px;
+  vertical-align: middle;
+  background-color: #000;
+}
+
+.photmain {
+  overflow: visible;
+}
+
+/* photo main-img */
+.photmain img{
+  padding-top: 5px;
+  padding-bottom: 20px;
+}
+
+.pictrow { 
+  clear:both;
+}
+
+.pictrow{
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+

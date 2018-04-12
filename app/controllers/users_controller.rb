@@ -5,6 +5,8 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @pictures = @user.pictures.order('created_at DESC').page(params[:page]).per(12)
+    counts(@user)
   end
 
   def new
