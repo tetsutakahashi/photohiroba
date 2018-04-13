@@ -1,5 +1,5 @@
 class PicturesController < ApplicationController
-  before_action :require_user_logged_in
+  before_action :require_user_logged_in, only: [:mew, :create, :destroy]
   
   def new
     @picture = current_user.pictures.build  # form_for 用
@@ -8,11 +8,11 @@ class PicturesController < ApplicationController
   def create
     @picture = current_user.pictures.build(picture_params)
     if @picture.save
-      flash[:success] = 'メッセージを投稿しました。'
+      flash[:success] = '写真を投稿しました。'
       redirect_to root_url
     else
       @pictures = current_user.pictures.order('created_at DESC').page(params[:page])
-      flash.now[:danger] = 'メッセージの投稿に失敗しました。'
+      flash.now[:danger] = '写真の投稿に失敗しました。'
       render 'toppages/index'
     end
   end
@@ -26,7 +26,7 @@ class PicturesController < ApplicationController
 
   def destroy
     @picture.destroy
-    flash[:success] = 'メッセージを削除しました。'
+    flash[:success] = '写真を削除しました。'
     redirect_back(fallback_location: root_path)
   end
 
