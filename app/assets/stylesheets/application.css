@@ -83,6 +83,7 @@ footer {
   border-radius: 3px;/*角の丸み*/
   border: 1px solid #c0c0c0;
   margin-bottom: 5px;
+  word-wrap: break-word;
 }
 .describetl{
   font-size: 1em
