@@ -88,3 +88,6 @@ footer {
 .describetl{
   font-size: 1em
 }
+.photocomment{
+  word-wrap: break-word;
+}

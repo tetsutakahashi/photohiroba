@@ -7,7 +7,7 @@ class PhotocmtsController < ApplicationController
   def create
     @photocmt = current_user.photocmts.build(photocmt_params)
     @photocmt.picture_id = params[:picture_id]
-    if @photocmt.save!
+    if @photocmt.save
       flash[:success] = 'コメントを投稿しました。'
       redirect_back(fallback_location: root_path)
     else

@@ -85,7 +85,6 @@
     
     <div class="commentform">
       <% if logged_in? %>
-      <% unless current_user == @user %>
         <%= form_for(@photocmt) do |f| %>
           <div class="form-group">
             <%= f.label :comment, 'コメント' %>
@@ -94,7 +93,6 @@
           </div>
           <%= f.submit 'comment投稿', class: 'btn btn-primary btn-block' %>
         <% end %>
-      <% end %>
       <% end %>
     </div>
   </aside>
