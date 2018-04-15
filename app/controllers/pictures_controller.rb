@@ -21,6 +21,8 @@ class PicturesController < ApplicationController
     @user = User.find(params[:id])
     @photo = Picture.find(params[:photoid])
     @pictures = @user.pictures.order('created_at DESC').page(params[:page]).per(12)
+    @photocmt = current_user.photocmts.build 
+    @photocmts = Photocmt.where(picture_id: @photo.id).order('created_at DESC').page(params[:page]).per(12)
   end
   
 

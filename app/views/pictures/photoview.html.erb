@@ -14,18 +14,20 @@
         <!-- 選択肢 -->
         <ul class="dropdown-menu">
           <li class="<%= 'active' if current_page?(user_path(@user)) %>"><%= link_to user_path(@user) do %>写真一覧 <span class="badge"><%= @count_pictures %></span><% end %></li>
-          <li><a href="#">Followings</a></li>
-          <li><a href="#">Followers</a></li>
+          <li class="<%= 'active' if current_page?(followings_user_path(@user)) %>"><%= link_to followings_user_path(@user) do %>Followings <span class="badge"><%= @count_followings %></span><% end %></li>
+          <li class="<%= 'active' if current_page?(followers_user_path(@user)) %>"><%= link_to followers_user_path(@user) do %>Followers <span class="badge"><%= @count_followers %></span><% end %></li>
+          <li class="<%= 'active' if current_page?(myfavorites_user_path(@user)) %>"><%= link_to myfavorites_user_path(@user) do %>myfavorites <span class="badge"><%= @count_favopictures %></span><% end %></li>
         </ul>
       </div>
     </div>
   </div>
+</div>
 
-
+<div class="row">
   <div class="photmain">
     <aside class="col-md-3 col-sm-12 col-xs-12" >
       <div class="photodata2" >
-      <h1><%= @photo.title %></h1>
+        <h2><%= @photo.title %></h2>
         <table class="table table-bordered">
           <tr>
             <th class="text-center">項目</th>
@@ -56,20 +58,48 @@
             <td class="text-right"><%= @photo.tag %></td>
           </tr>
         </table>
-
+        
+        <% if logged_in? %>
+          <%= render 'favorites/favorite_button', picture: @photo %>
+        <% end %>
+        
       </div>
     </aside>
   
     <div class="col-md-9 col-sm-12 col-xs-12" >
-    <div class="photoimg">    
-      <div class="photoview-heading text-center">
-        <img src="<%= @photo.image.thumb3.url %>" alt="" >
-      </div>
-    </div>    
+      <div class="photoimg">    
+        <div class="photoview-heading text-center">
+          <img src="<%= @photo.image.thumb3.url %>" alt="" >
+        </div>
+      </div>    
     </div>   
   </div>
-      
-  <div class="pictrow">  
-    <%= render 'photo', pictures: @pictures %>
+</div>
+
+<div class="row">
+  <aside class="col-md-4">
+    <p class='describetl'>写真説明</p>
+    <div class='describe'>
+      <p><%= @photo.description %></p>
+    </div>
+    
+    <div class="commentform">
+      <% if logged_in? %>
+      <% unless current_user == @user %>
+        <%= form_for(@photocmt) do |f| %>
+          <div class="form-group">
+            <%= f.label :comment, 'コメント' %>
+            <%= f.text_area :comment, class: 'form-control', rows: 5 %>
+            <%= hidden_field_tag :picture_id, @photo.id %>
+          </div>
+          <%= f.submit 'comment投稿', class: 'btn btn-primary btn-block' %>
+        <% end %>
+      <% end %>
+      <% end %>
+    </div>
+  </aside>
+    
+  <div class="col-xs-8">
+    <%= render 'photocmts/photocmts', photocmts: @photocmts %>
   </div>
 </div>

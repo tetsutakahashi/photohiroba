@@ -7,4 +7,9 @@ class Picture < ApplicationRecord
   
   mount_uploader :image, ImageUploader
   
+  has_many :favorites
+  has_many :users, through: :favorites
+
+  has_many :photocmts
+  has_many :cmtusers, through: :photocmts, source: :users
 end

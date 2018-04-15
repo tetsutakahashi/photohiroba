@@ -1,0 +1,21 @@
+<% if current_user.favopicture?(picture) %>
+
+  <%= form_for(current_user.favorites.find_by(picture_id: picture.id), html: { method: :delete }) do |f| %>
+
+  <%= hidden_field_tag :picture_id, picture.id %>
+
+  <%= f.submit 'Unfavorite', class: 'btn btn-danger btn-xs' %>
+
+  <% end %>
+
+<% else %>
+
+  <%= form_for(current_user.favorites.build) do |f| %>
+
+  <%= hidden_field_tag :picture_id, picture.id %>
+
+  <%= f.submit 'favorite', class: 'btn btn-primary btn-xs' %>
+
+  <% end %>
+  
+<% end %>

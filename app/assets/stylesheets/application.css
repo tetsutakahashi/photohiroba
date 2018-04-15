@@ -38,9 +38,9 @@ footer {
 }
 
 .picture img {
-    width: 100%;
-    height: auto;
-    object-fit: contain;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
 }
 
 /* photoviewnavi */
@@ -77,4 +77,13 @@ footer {
 .media-list{
   margin-top: 10px;
 }
-
+.describe{
+  width: 100%;
+  height: 5%;
+  border-radius: 3px;/*角の丸み*/
+  border: 1px solid #c0c0c0;
+  margin-bottom: 5px;
+}
+.describetl{
+  font-size: 1em
+}

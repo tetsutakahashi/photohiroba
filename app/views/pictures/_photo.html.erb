@@ -2,7 +2,7 @@
     
   <% pictures.each do |picture| %>
 
-      <div class="picture">
+      <div class="photo">
         <div class="col-md-2 col-sm-2 col-xs-3">
           <div class="panel panel-default">
           
@@ -12,9 +12,6 @@
               <% end %>
             </div>
             
-            <div class="photo-main">
-              <p><%= link_to picture.title, photoview_picture_path(id: picture.user,photoid: picture.id) %></p>
-            </div>
           </div>
         </div>
       </div>
