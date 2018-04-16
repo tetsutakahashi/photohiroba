@@ -19,6 +19,6 @@
       <li class="<%= 'active' if current_page?(followers_user_path(@user)) %>"><%= link_to followers_user_path(@user) do %>Followers <span class="badge"><%= @count_followers %></span><% end %></li>
       <li class="<%= 'active' if current_page?(myfavorites_user_path(@user)) %>"><%= link_to myfavorites_user_path(@user) do %>myfavorites <span class="badge"><%= @count_favopictures %></span><% end %></li>
     </ul>
-    <%= render 'pictures/pictures', pictures: @favopictures %>
+    <%= render 'toppages/pictures', pictures: @favopictures %>
   </div>
 </div>

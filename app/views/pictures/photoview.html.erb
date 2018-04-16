@@ -60,7 +60,9 @@
         </table>
         
         <% if logged_in? %>
-          <%= render 'favorites/favorite_button', picture: @photo %>
+          <% unless current_user == @user %>
+            <%= render 'favorites/favorite_button', picture: @photo %>
+          <% end %>
         <% end %>
         
       </div>
@@ -86,6 +88,7 @@
     <div class="commentform">
       <% if logged_in? %>
         <%= form_for(@photocmt) do |f| %>
+          <%= render 'layouts/error_messages', model: f.object %>
           <div class="form-group">
             <%= f.label :comment, 'コメント' %>
             <%= f.text_area :comment, class: 'form-control', rows: 5 %>

@@ -12,7 +12,7 @@ class PhotocmtsController < ApplicationController
       redirect_back(fallback_location: root_path)
     else
       @photocmts = current_user.photocmts.order('created_at DESC').page(params[:page])
-      flash.now[:danger] = 'コメントの投稿に失敗しました。'
+      flash[:danger] = 'コメントの投稿に失敗しました。'
       redirect_back(fallback_location: root_path)
     end
   end

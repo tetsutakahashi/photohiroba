@@ -11,9 +11,8 @@ class PicturesController < ApplicationController
       flash[:success] = '写真を投稿しました。'
       redirect_to root_url
     else
-      @pictures = current_user.pictures.order('created_at DESC').page(params[:page])
       flash.now[:danger] = '写真の投稿に失敗しました。'
-      render 'toppages/index'
+      render 'new'
     end
   end
   
