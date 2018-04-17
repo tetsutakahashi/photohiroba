@@ -14,7 +14,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :pictures, only: [:new, :create, :destroy]do
+  resources :pictures, only: [:new, :edit, :create, :update, :destroy]do
     member do
       get :photoview
       get :photoshow

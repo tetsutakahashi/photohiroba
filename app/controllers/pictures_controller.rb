@@ -5,6 +5,9 @@ class PicturesController < ApplicationController
     @picture = current_user.pictures.build  # form_for 用
   end
 
+  def edit
+  end
+  
   def create
     @picture = current_user.pictures.build(picture_params)
     if @picture.save
@@ -15,6 +18,17 @@ class PicturesController < ApplicationController
       render 'new'
     end
   end
+  
+  def update
+    if @picture.update(product_params)
+      flash[:success] = '写真を投稿しました。'
+      redirect_to root_url
+    else
+      flash.now[:danger] = '写真の投稿に失敗しました。'
+      render 'edit'
+    end
+  end
+  
   
   def photoview
     @user = User.find(params[:id])
