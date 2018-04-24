@@ -8,7 +8,7 @@
         <div class="col-md-3 col-sm-4 col-xs-6">
           <div class="panel panel-default">
             <div class="panel-heading text-center">
-              <%= link_to photoview_picture_path(id: picture.user,photoid: picture.id) do %>
+              <%= link_to photoview_picture_path(picture) do %>
               <img src="<%= picture.image.thumb1.url %>" alt="">
               <% end %>
             </div>

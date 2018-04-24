@@ -1,0 +1,55 @@
+<ul class="media-list">
+  
+<% photocmts.each do |photocmt| %>
+
+  <% unless photocmt.id == @editcmt.id %>
+    <li class="media">
+      <div class="media-left">
+        <img class="media-object img-rounded" src="<%= gravatar_url(photocmt.user, options = { size: 50 }) %>" alt="">
+      </div>
+      <div class="media-body">
+        <div>
+          <%= link_to photocmt.user.name, user_path(photocmt.user) %> 
+          <span class="text-muted">updated at <%= photocmt.updated_at %></span>
+        </div>
+        <div class="photocomment">
+          <p><%= photocmt.comment %></p>
+        </div>
+        <% if current_user == photocmt.user %>
+          <%= link_to '編集', edit_photocmt_path(photocmt) %> |
+          <%= link_to '削除', photocmt, method: :delete, data: { confirm: '本当に削除してよろしいですか？' } %>
+        <% end %>
+      </div>
+    </li>
+  <% else %>
+    <li class="media">
+      <div class="media-left">
+        <img class="media-object img-rounded" src="<%= gravatar_url(photocmt.user, options = { size: 50 }) %>" alt="">
+      </div>
+      <div class="media-body">
+        <div>
+          <%= link_to photocmt.user.name, user_path(photocmt.user) %> 
+          <span class="text-muted">updated at <%= photocmt.updated_at %></span>
+        </div>
+        <%= form_for(photocmt) do |f| %>
+          <%= render 'layouts/error_messages', model: f.object %>
+          <div class="form-group">
+            <%= f.label :comment, 'コメント' %>
+            <%= f.text_area :comment, class: 'form-control', rows: 5 %>
+            <%= hidden_field_tag :photocmt_id, photocmt.id %>
+          </div>
+          <%= f.submit 'comment投稿', class: 'btn btn-primary btn-block' %>
+        <% end %>
+        <% if current_user == photocmt.user %>
+          <%= link_to '削除', photocmt, method: :delete, data: { confirm: '本当に削除してよろしいですか？' } %>
+        <% end %>
+      </div>
+    </li>
+  
+  <% end %>
+  
+<% end %>
+
+<%= paginate photocmts %>
+
+</ul>

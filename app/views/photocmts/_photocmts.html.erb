@@ -1,7 +1,6 @@
 <ul class="media-list">
   
 <% photocmts.each do |photocmt| %>
-
     <li class="media">
       <div class="media-left">
         <img class="media-object img-rounded" src="<%= gravatar_url(photocmt.user, options = { size: 50 }) %>" alt="">
@@ -14,9 +13,12 @@
         <div class="photocomment">
           <p><%= photocmt.comment %></p>
         </div>
+        <% if current_user == photocmt.user %>
+          <%= link_to '編集', edit_photocmt_path(photocmt) %> |
+          <%= link_to '削除', photocmt, method: :delete, data: { confirm: '本当に削除してよろしいですか？' } %>
+        <% end %>
       </div>
     </li>
-  
 <% end %>
 
 <%= paginate photocmts %>

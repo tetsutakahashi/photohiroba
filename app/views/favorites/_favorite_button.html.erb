@@ -4,8 +4,8 @@
 
   <%= hidden_field_tag :picture_id, picture.id %>
 
-  <%= f.submit 'Unfavorite', class: 'btn btn-danger btn-xs' %>
-
+  <button type="submit" class="btn btn-danger"> Unfavorite <span class="badge"><%= @fvcount_users %></span></button>
+  
   <% end %>
 
 <% else %>
@@ -14,8 +14,8 @@
 
   <%= hidden_field_tag :picture_id, picture.id %>
 
-  <%= f.submit 'favorite', class: 'btn btn-primary btn-xs' %>
-
+  <button type="submit" class="btn btn-primary"> favorite <span class="badge"><%= @fvcount_users %></span></button>
+      
   <% end %>
   
 <% end %>

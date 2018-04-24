@@ -6,8 +6,10 @@ class User < ApplicationRecord
                     uniqueness: { case_sensitive: false }
   has_secure_password
   
-  has_many :pictures
-  has_many :relationships
+  has_many :pictures, dependent: :destroy
+  accepts_nested_attributes_for :pictures, allow_destroy: true
+  has_many :relationships, dependent: :destroy
+  accepts_nested_attributes_for :relationships, allow_destroy: true
   has_many :followings, through: :relationships, source: :follow
   has_many :reverses_of_relationship, class_name: 'Relationship', foreign_key: 'follow_id'
   has_many :followers, through: :reverses_of_relationship, source: :user
@@ -27,8 +29,9 @@ class User < ApplicationRecord
     self.followings.include?(other_user)
   end
   
-  has_many :favorites
+  has_many :favorites, dependent: :destroy
   has_many :favopictures, through: :favorites, source: :picture
+  accepts_nested_attributes_for :favorites, allow_destroy: true
   
   def favort(fv_picture)
     unless self == fv_picture.user
@@ -45,8 +48,9 @@ class User < ApplicationRecord
     self.favopictures.include?(fv_picture)
   end
 
-  has_many :photocmts
+  has_many :photocmts, dependent: :destroy
   has_many :cmtpictures, through: :photocmts, source: :picture
+  accepts_nested_attributes_for :photocmts, allow_destroy: true
 
   def phcomment(fv_picture,cmt)
     self.photocmts.find_or_create_by(picture_id: fv_picture.id,comment: cmt)

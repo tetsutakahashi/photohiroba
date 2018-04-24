@@ -17,4 +17,8 @@ class ApplicationController < ActionController::Base
     @count_followers = user.followers.count
     @count_favopictures = user.favopictures.count
   end
+  def fvcounts(picture)
+    @fvcount_users = picture.users.count
+    @fvcount_photocmts = picture.photocmts.count
+  end
 end

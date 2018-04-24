@@ -1,7 +1,28 @@
 class PhotocmtsController < ApplicationController
   before_action :require_user_logged_in
+  
+  def edit  
+    @editcmt = Photocmt.find(params[:id])
+    @user = User.find(@editcmt.user)
+    @photo = Picture.find(@editcmt.picture)
+    @pictures = @user.pictures.order('created_at DESC').page(params[:page]).per(12)
+    @photocmts = Photocmt.where(picture_id: @photo.id).order('created_at DESC').page(params[:page]).per(12)
+    fvcounts(@photo)
+    if logged_in?
+      @photocmt = current_user.photocmts.build
+    end
+  end  
 
   def update
+    @photocmt = Photocmt.find(params[:photocmt_id])
+    @picture = Picture.find(@photocmt.picture)
+    if @photocmt.update(photocmt_params)
+      flash[:success] = '写真、及び情報を変更しました。'
+      redirect_to photoview_picture_path(@picture)
+    else
+      flash.now[:danger] = '写真、及び情報の変更に失敗しました。'
+      render 'edit'
+    end
   end
 
   def create
@@ -18,9 +39,11 @@ class PhotocmtsController < ApplicationController
   end
 
   def destroy
+    @photocmt = Photocmt.find(params[:id])
+    @picture = Picture.find(@photocmt.picture)
     @photocmt.destroy
     flash[:success] = 'メッセージを削除しました。'
-    redirect_back(fallback_location: root_path)
+    redirect_to photoview_picture_path(@picture)
   end
 
   private
